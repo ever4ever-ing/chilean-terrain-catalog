@@ -2,7 +2,7 @@
 "use client";
 
 import Link from 'next/link';
-import { Mountain, Info } from 'lucide-react';
+import { Mountain, Info, HelpCircle } from 'lucide-react'; // Import HelpCircle icon
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
@@ -37,6 +37,17 @@ const NavigationBar = () => {
           >
             <Info className="w-4 h-4" />
             About
+          </Link>
+          {/* Add Help Button */}
+          <Link
+            href="/help" // Link to a help page (create this page if needed)
+            className={cn(
+              "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
+              isActive('/help') ? "text-primary" : "text-muted-foreground"
+            )}
+          >
+            <HelpCircle className="w-4 h-4" /> {/* Use HelpCircle icon */}
+            Help
           </Link>
         </div>
       </div>
