@@ -1,3 +1,4 @@
+
 "use client";
 
 import type { FC } from 'react';
@@ -21,7 +22,7 @@ const TerrainFilters: FC<TerrainFiltersProps> = ({ regions, onFilterChange, onSo
   const [maxPrice, setMaxPrice] = useState<string>('');
   const [minArea, setMinArea] = useState<string>('');
   const [maxArea, setMaxArea] = useState<string>('');
-  const [selectedRegion, setSelectedRegion] = useState<string>('');
+  const [selectedRegion, setSelectedRegion] = useState<string>('all'); // Default to 'all'
   const [sortBy, setSortBy] = useState<string>('price');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
@@ -38,7 +39,7 @@ const TerrainFilters: FC<TerrainFiltersProps> = ({ regions, onFilterChange, onSo
       maxPrice: maxPrice ? parseFloat(maxPrice) : undefined,
       minArea: minArea ? parseFloat(minArea) : undefined,
       maxArea: maxArea ? parseFloat(maxArea) : undefined,
-      regionId: selectedRegion ? parseInt(selectedRegion) : undefined,
+      regionId: selectedRegion && selectedRegion !== 'all' ? parseInt(selectedRegion) : undefined, // Check for 'all'
     };
     // Remove undefined values
     const activeFilters = Object.fromEntries(Object.entries(filters).filter(([_, v]) => v !== undefined));
@@ -86,7 +87,8 @@ const TerrainFilters: FC<TerrainFiltersProps> = ({ regions, onFilterChange, onSo
                 <SelectValue placeholder="Select Region" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Regions</SelectItem>
+                {/* Use "all" instead of "" for the value */}
+                <SelectItem value="all">All Regions</SelectItem>
                 {regions.map((region) => (
                   <SelectItem key={region.id} value={String(region.id)}>
                     {region.name}
