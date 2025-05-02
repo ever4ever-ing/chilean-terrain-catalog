@@ -72,7 +72,7 @@ const TerrainFilters: FC<TerrainFiltersProps> = ({ regions, onFilterChange, onSo
   return (
     <Card className="mb-6 shadow-sm">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+        <CardTitle className="flex items-center gap-2 shadow-md"> {/* Added shadow-md */}
           <Filter className="w-5 h-5 text-primary" />
           Filter & Sort Terrains
         </CardTitle>
@@ -87,7 +87,6 @@ const TerrainFilters: FC<TerrainFiltersProps> = ({ regions, onFilterChange, onSo
                 <SelectValue placeholder="Select Region" />
               </SelectTrigger>
               <SelectContent>
-                {/* Use "all" instead of "" for the value */}
                 <SelectItem value="all">All Regions</SelectItem>
                 {regions.map((region) => (
                   <SelectItem key={region.id} value={String(region.id)}>
